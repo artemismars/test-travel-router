@@ -16,7 +16,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: process.env.HOSTING_PATH || "http://localhost:3000",
       },
     ],
   },
