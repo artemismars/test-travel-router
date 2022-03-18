@@ -66,7 +66,7 @@ router.get("/users", async (req, res) => {
 
 /**
  * @swagger
- * /signup/doublecheck:
+ * /signup/1:
  *  post:
  *    tags:
  *    - User
@@ -101,7 +101,7 @@ router.post("/signup/1", auth.doubleCheck, (req, res) => {
 
 /**
  * @swagger
- * /signup:
+ * /signup/2:
  *    post:
  *      tags:
  *      - User
