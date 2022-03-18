@@ -1,9 +1,6 @@
 {
   "development": {
-    "username": "yvmk8stj6pwb",
-    "password": "pscale_pw_Hd0xTDDHeZalTQPJ9i5SMfNxCuDSVawHS2tFx9wgKzw",
     "database": "travel",
-    "host": "d6wxhc8dn5j1.us-east-3.psdb.cloud",
     "dialect": "mysql",
     "dialectOptions": {
       "ssl": {
