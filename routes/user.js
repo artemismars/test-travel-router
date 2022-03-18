@@ -148,15 +148,13 @@ router.post("/signup/2", auth.emailVerification, async (req, res) => {
  *    tags:
  *    - User
  *    summary: generate email verification token
- *    produces:
- *    - application/json
  *    parameters:
  *      - in: path
- *      name: verificationToken
- *      schema:
- *        type: string
- *      required: true
- *      description: Verify Email Verification Token
+ *        name: verificationToken
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: Verify Email Verification Token
  *
  */
 router.get("/signup/:verificationToken", async (req, res) => {
