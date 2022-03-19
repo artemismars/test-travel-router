@@ -34,6 +34,7 @@ const emailVerification = async (req, res, next) => {
     const transport = nodemailer.createTransport({
       host: "smtp.gmail.com",
       service: "gmail",
+      secure: true,
       auth: {
         user: process.env.ADMIN_USER,
         pass: process.env.ADMIN_PASS,
