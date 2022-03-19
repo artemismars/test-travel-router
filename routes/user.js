@@ -1,10 +1,6 @@
 const router = require("express").Router();
-// const db = require("../config/db");
-const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
 const auth = require("../middleware/auth");
 const db = require("../models");
-
 /**
  * @swagger
  * tags:
@@ -129,7 +125,8 @@ router.post("/signup/2", auth.emailVerification, async (req, res) => {
   try {
     // 회원 이메일 중복 확인 버튼 클릭하고 회원가입 진행하는 건지 곧바로 회원가입 시도하는 것인지 감지하기 위한 if문
     if (res.locals.user) {
-      await db.User.create(res.locals.user);
+      const user = await db.User.create(res.locals.user);
+      console.log(user);
       res.json({
         message: "가입하신 이메일로 인증 링크를 발송했습니다.",
         user: res.locals.user,

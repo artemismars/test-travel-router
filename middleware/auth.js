@@ -1,7 +1,6 @@
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-// const db = require("../config/db");
 const db = require("../models/index");
 
 const doubleCheck = async (req, res, next) => {
@@ -21,7 +20,14 @@ const doubleCheck = async (req, res, next) => {
 
 const emailVerification = async (req, res, next) => {
   try {
-    let user = req.body;
+    let user = await db.User.findOne({
+      attributes: ["email"],
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (user) throw new Error("이미 가입된 이메일");
+    user = req.body;
     console.log(user);
     user.password = bcrypt.hashSync(user.password, 8);
     user.verificationToken = jwt.sign(user.email, process.env.JWT_SECRET);
