@@ -52,7 +52,7 @@ const emailVerification = async (req, res, next) => {
     res.locals.user = user;
     next();
   } catch (error) {
-    res.send({ error: error.message });
+    res.status(400).send({ error: error.message });
   }
 };
 
