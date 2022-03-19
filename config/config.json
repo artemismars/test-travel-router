@@ -2,11 +2,7 @@
   "development": {
     "database": "travel",
     "dialect": "mysql",
-    "dialectOptions": {
-      "ssl": {
-        "required": true
-      }
-    },
+    "dialectOptions": {},
     "define": {
       "timestamps": false
     }
