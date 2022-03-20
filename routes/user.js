@@ -158,12 +158,13 @@ router.get("/signup/:verificationToken", async (req, res) => {
   try {
     const token = req.params.verificationToken;
     const user = await db.User.findOne({
-      attributes: ["verificationToken"],
+      attributes: ["id", "verificationToken"],
       where: {
         verificationToken: token,
       },
     });
-    user.isVerified = true;
+    await user.update({ isVerified: true });
+    await user.save();
     res.json({ message: "인증 완료되었습니다. 이제 로그인 하실 수 있습니다." });
   } catch (error) {
     res.json({ error: error.message });
