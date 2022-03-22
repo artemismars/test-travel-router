@@ -22,7 +22,14 @@ if (config.use_env_variable) {
     // config.host
     config
   );
-  sequelize.authenticate();
+  sequelize
+    .authenticate()
+    .then((result) => {
+      console.log("authenticate success:", result);
+    })
+    .catch((err) => {
+      console.log("authenticate error:", err);
+    });
 }
 
 fs.readdirSync(__dirname)
