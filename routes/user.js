@@ -5,7 +5,7 @@ const db = require("../models");
  * @swagger
  * tags:
  *  name: User
- *  description: 유저 테이블에 관련된 라우팅
+ *  description: Routers about User table.
  * @swagger
  * components:
  *  schemas:
@@ -66,7 +66,7 @@ router.get("/users", async (req, res) => {
  *  post:
  *    tags:
  *    - User
- *    summary: 중복 이메일 확인
+ *    summary: Double check the email
  *    produces:
  *    - application/json
  *    requestBody:
@@ -80,16 +80,16 @@ router.get("/users", async (req, res) => {
  *            email: example@example.com
  *    responses:
  *      200:
- *        description: 사용 가능한 이메일입니다.
+ *        description: The email is available.
  *      400 :
- *        description: 이미 가입된 이메일입니다.
+ *        description: The email is already in use.
  */
 
 router.post("/signup/1", auth.doubleCheck, (req, res) => {
   try {
     if (res.locals.user === null)
-      res.json({ message: "사용 가능한 이메일입니다." });
-    else throw new Error("이미 가입된 메일입니다.");
+      res.json({ message: "The email is available" });
+    else throw new Error("The email is already in use");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -123,16 +123,15 @@ router.post("/signup/1", auth.doubleCheck, (req, res) => {
  */
 router.post("/signup/2", auth.emailVerification, async (req, res) => {
   try {
-    // 회원 이메일 중복 확인 버튼 클릭하고 회원가입 진행하는 건지 곧바로 회원가입 시도하는 것인지 감지하기 위한 if문
     if (res.locals.user) {
       const user = await db.User.create(res.locals.user);
       console.log(user);
       res.json({
-        message: "가입하신 이메일로 인증 링크를 발송했습니다.",
+        message: "Check your email! We sent you the email verification link",
         user: res.locals.user,
       });
     } else {
-      throw new Error("비정상적 접근입니다.");
+      throw new Error("Abnormal access");
     }
   } catch (error) {
     res.status(400).json({ error: error.messasge });
@@ -165,7 +164,7 @@ router.get("/signup/:verificationToken", async (req, res) => {
     });
     await user.update({ isVerified: true });
     await user.save();
-    res.json({ message: "인증 완료되었습니다. 이제 로그인 하실 수 있습니다." });
+    res.json({ message: "You are now verified! Please Sign in again!" });
   } catch (error) {
     res.json({ error: error.message });
   }
