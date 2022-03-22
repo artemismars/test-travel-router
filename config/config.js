@@ -9,7 +9,7 @@ const development = {
   dialect: env.DATABASE_DIALECT,
   dialectOptions: {
     ssl: {
-      required: false,
+      rejectUnauthorized: true,
     },
   },
   define: {
