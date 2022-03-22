@@ -22,6 +22,7 @@ if (config.use_env_variable) {
     // config.host
     config
   );
+  sequelize.authenticate();
 }
 
 fs.readdirSync(__dirname)
