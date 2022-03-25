@@ -23,6 +23,14 @@ const production = {
   database: env.DATABASE_NAME,
   host: env.DATABASE_HOST,
   dialect: env.DATABASE_DIALECT,
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: true,
+    },
+  },
+  define: {
+    timestamps: false,
+  },
 };
 
 const test = {
